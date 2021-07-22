@@ -1,27 +1,19 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MusicApp(),
-    );
-  }
-}
+ 
 
 class MusicApp extends StatefulWidget {
+  String path  ;
+
+    MusicApp({Key? key,  required this.path}) : super(key: key);
+
   @override
   _MusicAppState createState() => _MusicAppState();
 }
 
 class _MusicAppState extends State<MusicApp> {
+
   //we will need some variables
   bool playing = false; // at the begining we are not playing any song
   IconData playBtn = Icons.play_arrow; // the main state of the play button icon
@@ -74,7 +66,7 @@ class _MusicAppState extends State<MusicApp> {
     // };
 
     _player.onDurationChanged.listen((Duration d) {
-      print('Max duration: $d');
+      // print('Max duration: $d');
       setState(() => musicLength = d);
     });
 
@@ -86,7 +78,9 @@ class _MusicAppState extends State<MusicApp> {
     //   };
     // }
     _player.onAudioPositionChanged.listen((Duration p) =>
-        {print('Current position: $p'), setState(() => position = p)});
+        {
+        //print('Current position: $p'),
+         setState(() => position = p)});
 
     // _player.onPlayerStateChanged.listen((PlayerState s) => {
     //       print('Current player state: $s'),
@@ -163,10 +157,10 @@ class _MusicAppState extends State<MusicApp> {
                 ),
                       Center(
                         child: Text(
-                          "Music",
+                         widget. path.split('/').last,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 32.0,
+                            fontSize: 20.0,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -191,7 +185,7 @@ class _MusicAppState extends State<MusicApp> {
                               musicLength.toString().split(".")[0],
                               style: TextStyle(
                                  color: Colors.white,
-                                fontSize: 18.0,
+                                fontSize: 12.0,
                               ),
                             ),
                           ],
@@ -216,7 +210,7 @@ class _MusicAppState extends State<MusicApp> {
                               //here we will add the functionality of the play button
                               if (!playing) {
                                 //now let's play the song
-                                cache.play("pyaar.mp3");
+                                _player.play(widget.path);
                                 setState(() {
                                   playBtn = Icons.pause;
                                   playing = true;
