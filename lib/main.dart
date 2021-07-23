@@ -70,6 +70,14 @@ class _MyAudioList extends State<MyAudioList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            actions: [
+              IconButton(
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  setState(() {});
+                },
+              )
+            ],
             title: Text("Audio File list from Storage"),
             backgroundColor: Colors.redAccent),
         body: files == null
@@ -79,7 +87,9 @@ class _MyAudioList extends State<MyAudioList> {
                 itemCount: files?.length ?? 0,
                 itemBuilder: (context, index) {
                   if (playindex == index) {
-                    isPlay ? playicon = Icons.pause : playicon=Icons.play_arrow;
+                    isPlay
+                        ? playicon = Icons.pause
+                        : playicon = Icons.play_arrow;
                   } else {
                     playicon = Icons.play_arrow;
                   }
@@ -103,8 +113,13 @@ class _MyAudioList extends State<MyAudioList> {
                         color: Colors.redAccent,
                       ),
                     ),
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MusicApp(path: files[index].path,)));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MusicApp(
+                                    path: files[index].path,
+                                  )));
                     },
                   ));
                 },
