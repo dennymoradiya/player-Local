@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 class MusicApp extends StatefulWidget {
   String path  ;
-
-    MusicApp({Key? key,  required this.path}) : super(key: key);
+bool play;
+    MusicApp({Key? key,  required this.path, required this.play}) : super(key: key);
 
   @override
   _MusicAppState createState() => _MusicAppState();

@@ -114,11 +114,12 @@ class _MyAudioList extends State<MyAudioList> {
                       ),
                     ),
                     onTap: () {
+                      isPlay? _player.pause():Null;
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => MusicApp(
-                                    path: files[index].path,
+                                    path: files[index].path,play: isPlay,
                                   )));
                     },
                   ));
